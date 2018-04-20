@@ -4,8 +4,6 @@ process.env.NODE_ENV = 'test'
 let Category = require('../models/category').model
 let Product = require('../models/product').model
 
-let categoryService = require('../services/category')
-
 let chai = require('chai')
 let chaiHttp = require('chai-http')
 let server = require('../app')

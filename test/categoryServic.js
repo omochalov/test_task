@@ -7,8 +7,6 @@ let Product = require('../models/product').model
 let categoryService = require('../services/category')
 
 let chai = require('chai')
-let server = require('../app')
-
 chai.should()
 
 describe('Category service', () => {

@@ -4,7 +4,7 @@ const categoryService = require('../services/category')
 router.get('/', (req, res) => {
   categoryService.getAllCategories()
     .then(result => res.json(result))
-    .catch(err => res.send(err))
+    .catch(err => res.status(500).send(err))
 })
 
 router.post('/', (req, res) => {
@@ -26,7 +26,7 @@ router.post('/', (req, res) => {
 router.get('/:categoryID/products', (req, res) => {
   categoryService.getAllProductsByCategoryId(req.params.categoryID)
     .then(result => res.json(result))
-    .catch(err => res.send(err))
+    .catch(err => res.status(500).send(err))
 })
 
 router.post('/:categoryID/products', (req, res) => {

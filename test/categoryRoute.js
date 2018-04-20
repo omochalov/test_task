@@ -1,4 +1,4 @@
-/* eslint-disable no-undef */
+/* eslint-disable */
 process.env.NODE_ENV = 'test'
 
 let Category = require('../models/category').model
@@ -20,7 +20,7 @@ describe('Category route', () => {
   })
 
   describe('/GET categories', () => {
-    it('it should return empty array, if we doesn\'t create category before', (done) => {
+    it('it should return empty array, if we doesn\'t create any category', (done) => {
       chai.request(server)
         .get('/categories')
         .end((err, res) => {
