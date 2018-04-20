@@ -15,7 +15,6 @@ function deleteById (productId) {
       let index = category.products.indexOf(productId)
       if (index) {
         category.products.splice(category.products.indexOf(productId), 1)
-        category.products_count--
         return category.save()
       } else return {}
     })

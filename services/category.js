@@ -43,7 +43,6 @@ function createProductInCategory (categoryId, product) {
     .then(product => {
       newProduct = product
       findedCategory.products.push(product)
-      findedCategory.products_count++
       return findedCategory.save()
     })
     .then(category => {
