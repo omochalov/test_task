@@ -17,7 +17,7 @@ describe('Category service', () => {
       .then(done())
   })
 
-  it('new product should increment category.product_count value', (done) => {
+  it('new product should increment category.products_count value', (done) => {
     let product = {name: 'Butter', price: 2.6}
     let categoryId
 

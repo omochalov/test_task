@@ -1,6 +1,7 @@
 let mongoose = require('mongoose')
 let Schema = mongoose.Schema
 let uniqueValidator = require('mongoose-unique-validator')
+let idPlugin = require('../db/idPlugin')
 
 let productSchema = new Schema({
   name: {type: String, required: true, index: {unique: true}},
@@ -9,5 +10,7 @@ let productSchema = new Schema({
 })
 
 productSchema.plugin(uniqueValidator)
+productSchema.plugin(idPlugin)
+
 module.exports.schema = productSchema
 module.exports.model = mongoose.model('Product', productSchema)

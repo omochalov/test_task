@@ -58,7 +58,7 @@ describe('Category route', () => {
         .end((err, res) => {
           res.should.have.status(201)
           res.body.should.be.a('object')
-          res.body.should.have.property('_id')
+          res.body.should.have.property('id')
           res.body.should.have.property('name').and.be.eql('Candy')
           res.body.should.have.property('products_count').and.be.eql(0)
           done()
@@ -154,7 +154,7 @@ describe('Category route', () => {
             .end((err, res) => {
               res.should.have.status(201)
               res.body.should.be.a('object')
-              res.body.should.have.property('_id')
+              res.body.should.have.property('id')
               res.body.should.have.property('price').and.be.eql(2.6)
               res.body.should.have.property('name').and.be.eql('Butter')
               done()

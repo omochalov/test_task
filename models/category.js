@@ -1,6 +1,7 @@
 let mongoose = require('mongoose')
 let Schema = mongoose.Schema
 let uniqueValidator = require('mongoose-unique-validator')
+let idPlugin = require('../db/idPlugin')
 
 let categorySchema = new Schema({
   name: {type: String, required: true, index: {unique: true}},
@@ -14,6 +15,7 @@ categorySchema.pre('validate', function (next) {
 })
 
 categorySchema.plugin(uniqueValidator)
+categorySchema.plugin(idPlugin)
 
 module.exports.schema = categorySchema
 module.exports.model = mongoose.model('Category', categorySchema)
