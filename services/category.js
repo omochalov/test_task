@@ -1,4 +1,6 @@
 const mongoose = require('mongoose')
+const mongoErrorParser = require('../util/mongoErrorParser')
+
 const Category = mongoose.model('Category')
 const Product = mongoose.model('Product')
 
@@ -17,14 +19,7 @@ function create (name) {
   return Category.create({name})
     .then(result => result)
     .catch(err => {
-      let res = {errors: {name: []}}
-      if (err.errors.name.kind === 'required') {
-        res.errors.name.push('can\'t be blank')
-      }
-      if (err.errors.name.kind === 'unique') {
-        res.errors.name.push('must be unique')
-      }
-      return res
+      return mongoErrorParser(err)
     })
 }
 
@@ -55,35 +50,6 @@ function createProductInCategory (categoryId, product) {
       return newProduct
     })
     .catch(err => {
-      // TODO: move error parsing to another module
-      let res = {errors: {}}
-
-      if (err.code === 11000) {
-        res.errors.name = []
-        res.errors.name.push('must be unique')
-        return res
-      } else if (err.errors.hasOwnProperty('name')) {
-        res.errors.name = []
-        if (err.errors.name.kind === 'required') {
-          res.errors.name.push('can\'t be blank')
-        }
-        if (err.errors.name.kind === 'unique') {
-          res.errors.name.push('must be unique')
-        }
-      }
-
-      if (err.errors.hasOwnProperty('price')) {
-        res.errors.price = []
-        if (err.errors.price.kind === 'required') {
-          res.errors.price.push('can\'t be blank')
-        }
-        if (err.errors.price.kind === 'unique') {
-          res.errors.price.push('must be unique')
-        }
-        if (err.errors.price.kind === 'min') {
-          res.errors.price.push('can\'t be negative')
-        }
-      }
-      return res
+      return mongoErrorParser(err)
     })
 }
