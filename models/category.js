@@ -1,11 +1,10 @@
 let mongoose = require('mongoose')
 let Schema = mongoose.Schema
-let productSchema = require('./product').schema
 
 let categorySchema = new Schema({
-  name: {type: String, required: true, index: { unique: true }},
+  name: {type: String, required: true, index: {unique: true}},
   products_count: {type: Number, default: 0},
-  products: [ productSchema ]
+  products: [{type: Schema.Types.ObjectId, ref: 'Product'}]
 })
 
 module.exports.schema = categorySchema
