@@ -1,0 +1,4 @@
+{
+  "serverPort": 3000,
+  "connectionString": "mongodb://localhost/test_task_DB"
+}
