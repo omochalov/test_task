@@ -2,6 +2,7 @@ const express = require('express')
 const path = require('path')
 const cookieParser = require('cookie-parser')
 const logger = require('morgan')
+const config = require('config')
 require('./db')
 
 const categoriesRouter = require('./routes/categories')
@@ -9,7 +10,9 @@ const productsRouter = require('./routes/products')
 
 const app = express()
 
-app.use(logger('dev'))
+const loggerLevel = config.get('loggerLevel')
+if (loggerLevel !== 'disabled') { app.use(logger(loggerLevel)) }
+
 app.use(express.json())
 app.use(express.urlencoded({extended: false}))
 app.use(cookieParser())
