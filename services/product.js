@@ -5,16 +5,22 @@ module.exports = {
   deleteById
 }
 
-function deleteById(productId) {
-  Product.findById(productId)
+function deleteById (productId) {
+  return Product.findById(productId)
     .populate('category')
     .exec()
     .then(product => {
       let category = product.category
-      category.products.splice(category.products.indexOf(productId), 1)
-      category.save()
 
-      product.delete()
-      return Promise.resolve({})
+      let index = category.products.indexOf(productId)
+      if (index) {
+        category.products.splice(category.products.indexOf(productId), 1)
+        category.products_count--
+        return category.save()
+      } else return {}
+    })
+    .then(() => {
+      Product.remove({_id: productId})
+      return {}
     })
 }

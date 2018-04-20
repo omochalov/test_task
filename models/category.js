@@ -1,5 +1,6 @@
 let mongoose = require('mongoose')
 let Schema = mongoose.Schema
+let uniqueValidator = require('mongoose-unique-validator')
 
 let categorySchema = new Schema({
   name: {type: String, required: true, index: {unique: true}},
@@ -7,5 +8,6 @@ let categorySchema = new Schema({
   products: [{type: Schema.Types.ObjectId, ref: 'Product'}]
 })
 
+categorySchema.plugin(uniqueValidator)
 module.exports.schema = categorySchema
 module.exports.model = mongoose.model('Category', categorySchema)

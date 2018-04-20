@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "NODE_ENV=production node ./bin/www",
-    "start:dev": "NODE_ENV=development node ./bin/www"
+    "start:dev": "NODE_ENV=development node ./bin/www",
+    "test": "NODE_ENV=test mocha ./test"
   },
   "dependencies": {
     "config": "^1.30.0",
@@ -13,6 +14,7 @@
     "express": "~4.16.0",
     "http-errors": "~1.6.2",
     "mongoose": "^5.0.15",
+    "mongoose-unique-validator": "^2.0.0",
     "morgan": "~1.9.0"
   },
   "devDependencies": {

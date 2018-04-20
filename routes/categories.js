@@ -8,10 +8,18 @@ router.get('/', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-  if (!req.body.category) { req.body.category = {} }
+  if (!req.body.category) {
+    req.body.category = {}
+  }
 
   categoryService.create(req.body.category.name)
-    .then(result => res.status(201).json(result))
+    .then(result => {
+      if (result.errors) {
+        res.status(422).json(result)
+      } else {
+        res.status(201).json(result)
+      }
+    })
     .catch(err => res.status(422).send(err))
 })
 
@@ -23,7 +31,13 @@ router.get('/:categoryID/products', (req, res) => {
 
 router.post('/:categoryID/products', (req, res) => {
   categoryService.createProductInCategory(req.params.categoryID, req.body.product)
-    .then(result => res.status(201).json(result))
+    .then(result => {
+      if (result.errors) {
+        res.status(422).json(result)
+      } else {
+        res.status(201).json(result)
+      }
+    })
     .catch(err => res.status(422).send(err))
 })
 
