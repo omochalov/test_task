@@ -13,7 +13,7 @@ function deleteById (productId) {
       let category = product.category
 
       let index = category.products.indexOf(productId)
-      if (index) {
+      if (index >= 0) {
         category.products.splice(category.products.indexOf(productId), 1)
         return category.save()
       } else return {}
