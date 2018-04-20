@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const Category = mongoose.model('Category')
+const Product = mongoose.model('Product')
 
 module.exports = {
   getAllCategories,
@@ -19,13 +20,20 @@ function create (name) {
 
 function getAllProductsByCategoryId (categoryId) {
   return Category.findById(categoryId)
+    .populate('products', ['_id', 'name', 'price'])
+    .exec()
     .then(result => result.products)
 }
 
 function createProductInCategory (categoryId, product) {
   return Category.findById(categoryId)
     .then(category => {
-      category.products.push(product)
+      product.category = category._id
+
+      let newProduct = new Product(product)
+      newProduct.save()
+
+      category.products.push(newProduct)
       return category.save()
     })
 }
