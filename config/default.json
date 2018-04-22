@@ -1,5 +1,5 @@
 {
   "serverPort": 3000,
-  "connectionString": "mongodb://localhost/test_task_DB",
+  "connectionString": "mongodb://db:27017/test_task_DB",
   "loggerLevel": "tiny"
 }

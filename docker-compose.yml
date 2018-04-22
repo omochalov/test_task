@@ -1,0 +1,20 @@
+db:
+  image: mongo
+  volumes:
+    - /data/db
+  ports:
+    - '27017:27017'
+  command: --smallfiles
+
+web:
+  build: .
+  command: npm start
+  environment:
+    NODE_ENV: 'production'
+  ports:
+    - '3000:3000'
+  volumes:
+    - .:/home/app
+    - ./node_modules:/home/app/node_modules
+  links:
+    - db
